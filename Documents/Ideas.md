@@ -16,10 +16,6 @@ Regel-Resultat
   - Fehlerbeschreibung
   - OK / nicht Ok
 
-## Font prüfen
-
-Hat der ganze Text die gleiche Font?
-
 ## Regeln
 
 ### Wörter im Glossar
@@ -29,14 +25,6 @@ Werden die Wörter im Glossar tatsächlich verwendet?
 1. Glossar Tabelle identifizieren
 2. Wörter in der Glossar Tabelle identifizieren
 3. Wörter im Text Count > 1 (oder Glossar Tabelle ausschliessen)
-
-### Externe Links prüfen
-
-Sind alle externen Links im Word-Dokument aufrufbar?
-
-1. Link-Tabelle identifizieren
-2. Links in der Link-Tabelle identifizieren
-3. Alle Links aufrufen
 
 ### Externe Link LINK Verknüpfung
 
@@ -98,3 +86,19 @@ Sind alle internen Links innerhalb des Word-Dokuments?
 
 1. Alle Seitenzahlen prüfen
 2. Sind diese laufend?
+
+
+# Done
+
+## Font prüfen
+
+Hat der ganze Text die gleiche Font?
+
+
+### Externe Links prüfen
+
+Sind alle externen Links im Word-Dokument aufrufbar?
+
+1. Link-Tabelle identifizieren
+2. Links in der Link-Tabelle identifizieren
+3. Alle Links aufrufen

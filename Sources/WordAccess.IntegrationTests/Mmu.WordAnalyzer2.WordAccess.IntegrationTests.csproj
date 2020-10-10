@@ -19,14 +19,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="TestingInfrastructure\WordDocuments\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\WordAccess\Mmu.WordAnalyzer2.WordAccess.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="TestingInfrastructure\WordDocuments\Glossary.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestingInfrastructure\WordDocuments\HyperLinks.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestingInfrastructure\WordDocuments\TwoFonts.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestingInfrastructure\WordDocuments\Empty.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

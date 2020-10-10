@@ -16,16 +16,31 @@ namespace Mmu.WordAnalyzer2.WordAccess.IntegrationTests.TestingAreas.Features
         private string _wordDocumentName;
         private IWordDocumentRepository _wordDocumentRepo;
 
-        private Task And_given_the_WordDocument_is_empty()
+        private Task And_given_the_WordDocument_has_five_Words()
         {
-            _wordDocumentName = "Empty";
+            _wordDocumentName = "Plaintext";
 
             return Task.CompletedTask;
         }
 
-        private Task And_given_the_WordDocument_has_five_Words()
+        private Task And_given_the_WordDocument_has_HyperLinks_to_Google_and_Stackoverflow()
         {
-            _wordDocumentName = "PlainText";
+            _wordDocumentName = "HyperLinks";
+
+            return Task.CompletedTask;
+        }
+
+        private Task And_given_the_WordDocument_has_the_Fonts_Calibri_and_Consolas()
+        {
+            _wordDocumentName = "TwoFonts";
+
+            return Task.CompletedTask;
+        }
+
+        private Task And_given_the_WordDocument_is_empty()
+        {
+            _wordDocumentName = "Empty";
+
             return Task.CompletedTask;
         }
 
@@ -37,19 +52,40 @@ namespace Mmu.WordAnalyzer2.WordAccess.IntegrationTests.TestingAreas.Features
             return Task.CompletedTask;
         }
 
-        private Task Then_the_WordDocument_contains_one_empty_line()
-        {
-            Assert.NotNull(_wordDocument.Words);
-            Assert.Equal(1, _wordDocument.Words.Count);
-            Assert.Equal("\r", _wordDocument.Words.Single().Text);
-
-            return Task.CompletedTask;
-        }
-
         private Task Then_the_WordDocument_contains_five_Words()
         {
             Assert.NotNull(_wordDocument.Words);
             Assert.Equal(5, _wordDocument.Words.Count);
+
+            return Task.CompletedTask;
+        }
+
+        private Task Then_the_WordDocument_contains_HyperLinks_to_Google_and_StackOverflow()
+        {
+            Assert.NotNull(_wordDocument.ExternalHyperLinks);
+            Assert.Equal(2, _wordDocument.ExternalHyperLinks.Count);
+
+            Assert.Contains(_wordDocument.ExternalHyperLinks, f => f.Uri.AbsoluteUri == "https://www.google.ch/");
+            Assert.Contains(_wordDocument.ExternalHyperLinks, f => f.Uri.AbsoluteUri == "https://stackoverflow.com/");
+
+            return Task.CompletedTask;
+        }
+
+        private Task Then_the_WordDocument_contains_no_Words()
+        {
+            Assert.NotNull(_wordDocument.Words);
+            Assert.Empty(_wordDocument.Words);
+
+            return Task.CompletedTask;
+        }
+
+        private Task Then_the_WordDocument_contains_the_Fonts_Calibri_and_Consolas()
+        {
+            var distinctFonts = _wordDocument.Words.Select(f => f.Font.Name).Distinct().ToList();
+
+            Assert.Equal(2, distinctFonts.Count());
+            Assert.Contains(distinctFonts, f => f == "Consolas");
+            Assert.Contains(distinctFonts, f => f == "Calibri");
 
             return Task.CompletedTask;
         }

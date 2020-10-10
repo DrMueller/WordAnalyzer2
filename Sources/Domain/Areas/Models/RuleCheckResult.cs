@@ -4,7 +4,7 @@ namespace Mmu.WordAnalyzer2.Domain.Areas.Models
 {
     public class RuleCheckResult
     {
-        public RuleCheckResult(bool rulePassed, string ruleName, string errorMessage)
+        private RuleCheckResult(bool rulePassed, string ruleName, string errorMessage)
         {
             Guard.StringNotNullOrEmpty(() => ruleName);
 
@@ -16,5 +16,15 @@ namespace Mmu.WordAnalyzer2.Domain.Areas.Models
         public string ErrorMessage { get; }
         public string RuleName { get; }
         public bool RulePassed { get; }
+
+        public static RuleCheckResult CreateFailure(string ruleName, string errorMessage)
+        {
+            return new RuleCheckResult(false, ruleName, errorMessage);
+        }
+
+        public static RuleCheckResult CreatePassed(string ruleName)
+        {
+            return new RuleCheckResult(true, ruleName, string.Empty);
+        }
     }
 }

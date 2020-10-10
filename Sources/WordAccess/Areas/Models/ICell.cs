@@ -1,9 +1,9 @@
 ﻿namespace Mmu.WordAnalyzer2.WordAccess.Areas.Models
 {
-    public interface IWord
+    public interface ICell
     {
-        todo here reworrk word to Character
+        int ColumnIndex { get; }
+        int RowIndex { get; }
         string Text { get; }
-        IFont Font { get; }
     }
 }

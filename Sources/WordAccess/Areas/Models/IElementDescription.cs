@@ -1,9 +1,8 @@
 ﻿namespace Mmu.WordAnalyzer2.WordAccess.Areas.Models
 {
-    public interface IWord
+    public interface IElementDescription
     {
-        todo here reworrk word to Character
+        Position Position { get; }
         string Text { get; }
-        IFont Font { get; }
     }
 }

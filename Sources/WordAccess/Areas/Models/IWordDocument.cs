@@ -5,5 +5,7 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Models
     public interface IWordDocument
     {
         IReadOnlyCollection<IWord> Words { get; }
+
+        IReadOnlyCollection<IExternalHyperLink> ExternalHyperLinks { get; }
     }
 }

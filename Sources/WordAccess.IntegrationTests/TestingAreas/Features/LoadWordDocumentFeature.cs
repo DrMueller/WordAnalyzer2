@@ -8,7 +8,7 @@ namespace Mmu.WordAnalyzer2.WordAccess.IntegrationTests.TestingAreas.Features
     [FeatureDescription(
         @"In order to use the WordDocument
 as a programmer
-I want to load the Word Document")]
+I want to load the WordDocument")]
     public partial class LoadWordDocumentFeature
     {
         public LoadWordDocumentFeature()
@@ -23,7 +23,7 @@ I want to load the Word Document")]
                 Given_Loading_WordDocument,
                 And_given_the_WordDocument_is_empty,
                 When_the_WordDocument_is_loaded,
-                Then_the_WordDocument_contains_one_empty_line);
+                Then_the_WordDocument_contains_no_Words);
         }
 
         [Scenario]
@@ -36,5 +36,24 @@ I want to load the Word Document")]
                 Then_the_WordDocument_contains_five_Words);
         }
 
+        [Scenario]
+        public async Task ExternalHyperLinks()
+        {
+            await Runner.RunScenarioAsync(
+                Given_Loading_WordDocument,
+                And_given_the_WordDocument_has_HyperLinks_to_Google_and_Stackoverflow,
+                When_the_WordDocument_is_loaded,
+                Then_the_WordDocument_contains_HyperLinks_to_Google_and_StackOverflow);
+        }
+
+        [Scenario]
+        public async Task Word_Fonts_Calibri_and_Consolas()
+        {
+            await Runner.RunScenarioAsync(
+                Given_Loading_WordDocument,
+                And_given_the_WordDocument_has_the_Fonts_Calibri_and_Consolas,
+                When_the_WordDocument_is_loaded,
+                Then_the_WordDocument_contains_the_Fonts_Calibri_and_Consolas);
+        }
     }
 }
