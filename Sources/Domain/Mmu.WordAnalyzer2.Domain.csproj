@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+			<Features>IOperation</Features>
+			<CodeAnalysisRuleSet>..\..\CA_ProductionCode.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WordAccess\Mmu.WordAnalyzer2.WordAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mmu.Mlh.ServiceProvisioning" Version="2.1.5" />
+  </ItemGroup>
+
+</Project>

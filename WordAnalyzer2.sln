@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mmu.WordAnalyzer2.Console", "Sources\Console\Mmu.WordAnalyzer2.Console.csproj", "{5FE1FC82-8974-480C-89E5-9E9318563B89}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mmu.WordAnalyzer2.Domain.UnitTests", "Sources\Domain.UnitTests\Mmu.WordAnalyzer2.Domain.UnitTests.csproj", "{29541D46-ACBB-41BB-9DD6-7962D6CAFCF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mmu.WordAnalyzer2.WordAccess", "Sources\WordAccess\Mmu.WordAnalyzer2.WordAccess.csproj", "{4F143E2D-1548-4702-BE8F-6698877D0CA1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mmu.WordAnalyzer2.Domain", "Sources\Domain\Mmu.WordAnalyzer2.Domain.csproj", "{972A9EAC-6E9D-4A30-AEE5-1ABA65290289}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mmu.WordAnalyzer2.WordAccess.IntegrationTests", "Sources\WordAccess.IntegrationTests\Mmu.WordAnalyzer2.WordAccess.IntegrationTests.csproj", "{00AB6A0C-E7B7-4D90-AD4B-38127DEA9263}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5FE1FC82-8974-480C-89E5-9E9318563B89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FE1FC82-8974-480C-89E5-9E9318563B89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FE1FC82-8974-480C-89E5-9E9318563B89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FE1FC82-8974-480C-89E5-9E9318563B89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29541D46-ACBB-41BB-9DD6-7962D6CAFCF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29541D46-ACBB-41BB-9DD6-7962D6CAFCF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29541D46-ACBB-41BB-9DD6-7962D6CAFCF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29541D46-ACBB-41BB-9DD6-7962D6CAFCF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F143E2D-1548-4702-BE8F-6698877D0CA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F143E2D-1548-4702-BE8F-6698877D0CA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F143E2D-1548-4702-BE8F-6698877D0CA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F143E2D-1548-4702-BE8F-6698877D0CA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{972A9EAC-6E9D-4A30-AEE5-1ABA65290289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{972A9EAC-6E9D-4A30-AEE5-1ABA65290289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{972A9EAC-6E9D-4A30-AEE5-1ABA65290289}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{972A9EAC-6E9D-4A30-AEE5-1ABA65290289}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00AB6A0C-E7B7-4D90-AD4B-38127DEA9263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00AB6A0C-E7B7-4D90-AD4B-38127DEA9263}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00AB6A0C-E7B7-4D90-AD4B-38127DEA9263}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00AB6A0C-E7B7-4D90-AD4B-38127DEA9263}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E1B91E1E-F2F2-4CF9-B588-6903F1D85A89}
+	EndGlobalSection
+EndGlobal

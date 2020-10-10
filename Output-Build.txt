@@ -1,0 +1,7 @@
+﻿1>------ Build started: Project: Mmu.WordAnalyzer2.Domain, Configuration: Debug Any CPU ------
+1>Mmu.WordAnalyzer2.Domain -> C:\MyGit\Personal\WordAnalyzer2\Sources\Domain\bin\Debug\netcoreapp3.1\Mmu.WordAnalyzer2.Domain.dll
+2>------ Build started: Project: Mmu.WordAnalyzer2.Console, Configuration: Debug Any CPU ------
+3>------ Build started: Project: Mmu.WordAnalyzer2.Domain.UnitTests, Configuration: Debug Any CPU ------
+3>Mmu.WordAnalyzer2.Domain.UnitTests -> C:\MyGit\Personal\WordAnalyzer2\Sources\Domain.UnitTests\bin\Debug\netcoreapp3.1\Mmu.WordAnalyzer2.Domain.UnitTests.dll
+2>Mmu.WordAnalyzer2.Console -> C:\MyGit\Personal\WordAnalyzer2\Sources\Console\bin\Debug\netcoreapp3.1\Mmu.WordAnalyzer2.Console.dll
+========== Build: 3 succeeded, 0 failed, 1 up-to-date, 0 skipped ==========

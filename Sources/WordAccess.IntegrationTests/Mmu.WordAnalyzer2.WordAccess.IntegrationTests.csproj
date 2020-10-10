@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+			<Features>IOperation</Features>
+			<CodeAnalysisRuleSet>..\..\CA_TestCode.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LightBDD.Core" Version="3.2.0" />
+    <PackageReference Include="LightBDD.Framework" Version="3.2.0" />
+    <PackageReference Include="LightBDD.XUnit2" Version="3.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+    <PackageReference Include="Mmu.Mlh.LanguageExtensions" Version="2.3.88" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="TestingInfrastructure\WordDocuments\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WordAccess\Mmu.WordAnalyzer2.WordAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="TestingInfrastructure\WordDocuments\Empty.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestingInfrastructure\WordDocuments\Plaintext.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

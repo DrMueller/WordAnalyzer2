@@ -1,0 +1,19 @@
+﻿using Lamar;
+using Mmu.WordAnalyzer2.Domain.Areas.Rules;
+
+namespace Mmu.WordAnalyzer2.Domain.Infrastructure.DependencyInjection
+{
+    public class DomainServiceRegistryCollection : ServiceRegistry
+    {
+        public DomainServiceRegistryCollection()
+        {
+            Scan(
+                scanner =>
+                {
+                    scanner.AssemblyContainingType<DomainServiceRegistryCollection>();
+                    scanner.AddAllTypesOf<IRule>();
+                    scanner.WithDefaultConventions();
+                });
+        }
+    }
+}
