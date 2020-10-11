@@ -16,7 +16,21 @@ namespace Mmu.WordAnalyzer2.WordAccess.IntegrationTests.TestingAreas.Features
         private string _wordDocumentName;
         private IWordDocumentRepository _wordDocumentRepo;
 
-        private Task And_given_the_WordDocument_has_five_Words()
+        private Task And_given_the_WordDocument_contains_a_Glossary_Table()
+        {
+            _wordDocumentName = "Glossary";
+
+            return Task.CompletedTask;
+        }
+
+        private Task And_given_the_WordDocument_contains_a_Table_without_description()
+        {
+            _wordDocumentName = "TableWithoutDescription";
+
+            return Task.CompletedTask;
+        }
+
+        private Task And_given_the_WordDocument_has_23_Characters()
         {
             _wordDocumentName = "Plaintext";
 
@@ -30,16 +44,30 @@ namespace Mmu.WordAnalyzer2.WordAccess.IntegrationTests.TestingAreas.Features
             return Task.CompletedTask;
         }
 
-        private Task And_given_the_WordDocument_has_the_Fonts_Calibri_and_Consolas()
+        private Task And_given_the_WordDocument_has_just_an_empty_line()
         {
-            _wordDocumentName = "TwoFonts";
+            _wordDocumentName = "Empty";
 
             return Task.CompletedTask;
         }
 
-        private Task And_given_the_WordDocument_is_empty()
+        private Task And_given_the_WordDocument_has_one_Shape_with_a_description()
         {
-            _wordDocumentName = "Empty";
+            _wordDocumentName = "ShapeWithDescription";
+
+            return Task.CompletedTask;
+        }
+
+        private Task And_given_the_WordDocument_has_one_Shape_without_description()
+        {
+            _wordDocumentName = "ShapeWithoutDescription";
+
+            return Task.CompletedTask;
+        }
+
+        private Task And_given_the_WordDocument_has_the_Fonts_Calibri_and_Consolas()
+        {
+            _wordDocumentName = "TwoFonts";
 
             return Task.CompletedTask;
         }
@@ -52,10 +80,34 @@ namespace Mmu.WordAnalyzer2.WordAccess.IntegrationTests.TestingAreas.Features
             return Task.CompletedTask;
         }
 
-        private Task Then_the_WordDocument_contains_five_Words()
+        private Task Then_the_glossary_Table_contains_the_description_Glossar()
         {
-            Assert.NotNull(_wordDocument.Words);
-            Assert.Equal(5, _wordDocument.Words.Count);
+            var glossaryTable = _wordDocument.Tables.Single();
+            Assert.EndsWith("Glossar", glossaryTable.Description.PlainDescription);
+
+            return Task.CompletedTask;
+        }
+
+        private Task Then_the_WordDocument_contains_one_Table()
+        {
+            Assert.Equal(1, _wordDocument.Tables.Count);
+
+            return Task.CompletedTask;
+        }
+
+        private Task Then_the_single_Table_contains_no_Description()
+        {
+            var table = _wordDocument.Tables.Single();
+            Assert.Equal(string.Empty, table.Description.PlainDescription);
+            Assert.Equal(Position.None, table.Description.Position);
+
+            return Task.CompletedTask;
+        }
+
+        private Task Then_the_WordDocument_contains_23_Characters()
+        {
+            Assert.NotNull(_wordDocument.Characters);
+            Assert.Equal(23, _wordDocument.Characters.Entries.Count);
 
             return Task.CompletedTask;
         }
@@ -71,19 +123,46 @@ namespace Mmu.WordAnalyzer2.WordAccess.IntegrationTests.TestingAreas.Features
             return Task.CompletedTask;
         }
 
-        private Task Then_the_WordDocument_contains_no_Words()
+        private Task Then_the_WordDocument_contains_no_Characters()
         {
-            Assert.NotNull(_wordDocument.Words);
-            Assert.Empty(_wordDocument.Words);
+            Assert.NotNull(_wordDocument.Characters);
+            Assert.Empty(_wordDocument.Characters.Entries);
+
+            return Task.CompletedTask;
+        }
+
+        private Task Then_the_WordDocument_contains_one_Shape()
+        {
+            Assert.NotNull(_wordDocument.Shapes);
+            Assert.Equal(1, _wordDocument.Shapes.Count);
+
+            return Task.CompletedTask;
+        }
+
+
+        private Task Then_the_Shape_has_a_description()
+        {
+            var shape = _wordDocument.Shapes.Single();
+            Assert.Equal("Abbildung 1: Test", shape.Description.PlainDescription);
+            Assert.Equal(Position.Below, shape.Description.Position);
+
+            return Task.CompletedTask;
+        }
+
+        private Task Then_the_Shape_has_no_description()
+        {
+            var shape = _wordDocument.Shapes.Single();
+            Assert.Equal(string.Empty, shape.Description.PlainDescription);
+            Assert.Equal(Position.None, shape.Description.Position);
 
             return Task.CompletedTask;
         }
 
         private Task Then_the_WordDocument_contains_the_Fonts_Calibri_and_Consolas()
         {
-            var distinctFonts = _wordDocument.Words.Select(f => f.Font.Name).Distinct().ToList();
+            var distinctFonts = _wordDocument.Characters.Entries.Select(f => f.Font.Name).Distinct().ToList();
 
-            Assert.Equal(2, distinctFonts.Count());
+            Assert.Equal(2, distinctFonts.Count);
             Assert.Contains(distinctFonts, f => f == "Consolas");
             Assert.Contains(distinctFonts, f => f == "Calibri");
 

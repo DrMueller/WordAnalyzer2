@@ -24,11 +24,11 @@ namespace Mmu.WordAnalyzer2.Domain.UnitTests.TestingAreas.Areas.Rules.Font
         public async Task CheckingRule_WordDocumentHavingMultipleFonts_ReturnsNotPassed()
         {
             // Arrange
-            var wordMocks = new List<Mock<IWord>>
+            var charMocks = new List<Mock<ICharacter>>
             {
-                new Mock<IWord>(),
-                new Mock<IWord>(),
-                new Mock<IWord>()
+                new Mock<ICharacter>(),
+                new Mock<ICharacter>(),
+                new Mock<ICharacter>()
             };
 
             var consolasFontMock = new Mock<IFont>();
@@ -37,16 +37,18 @@ namespace Mmu.WordAnalyzer2.Domain.UnitTests.TestingAreas.Areas.Rules.Font
             var arialFontMock = new Mock<IFont>();
             arialFontMock.Setup(f => f.Name).Returns("Arial");
 
-            wordMocks.First().Setup(f => f.Font).Returns(arialFontMock.Object);
+            charMocks.First().Setup(f => f.Font).Returns(arialFontMock.Object);
 
-            wordMocks.Skip(1).ForEach(
+            charMocks.Skip(1).ForEach(
                 word =>
                 {
                     word.Setup(f => f.Font).Returns(consolasFontMock.Object);
                 });
 
-            var wordObjects = wordMocks.Select(f => f.Object).ToList();
-            _documentMock.Setup(f => f.Words).Returns(wordObjects);
+            var charObjects = charMocks.Select(f => f.Object).ToList();
+            var chars = new Mock<ICharacters>();
+            chars.Setup(f => f.Entries).Returns(charObjects);
+            _documentMock.Setup(f => f.Characters).Returns(chars.Object);
 
             // Act
             var actualResult = await _sut.CheckRuleAsync(_documentMock.Object);
@@ -59,24 +61,26 @@ namespace Mmu.WordAnalyzer2.Domain.UnitTests.TestingAreas.Areas.Rules.Font
         public async Task CheckingRule_WordDocumentHavingOneFont_ReturnsPassed()
         {
             // Arrange
-            var wordMocks = new List<Mock<IWord>>
+            var charMocks = new List<Mock<ICharacter>>
             {
-                new Mock<IWord>(),
-                new Mock<IWord>(),
-                new Mock<IWord>()
+                new Mock<ICharacter>(),
+                new Mock<ICharacter>(),
+                new Mock<ICharacter>()
             };
 
             var fontMock = new Mock<IFont>();
             fontMock.Setup(f => f.Name).Returns("Consolas");
 
-            wordMocks.ForEach(
+            charMocks.ForEach(
                 word =>
                 {
                     word.Setup(f => f.Font).Returns(fontMock.Object);
                 });
 
-            var wordObjects = wordMocks.Select(f => f.Object).ToList();
-            _documentMock.Setup(f => f.Words).Returns(wordObjects);
+            var charObjects = charMocks.Select(f => f.Object).ToList();
+            var chars = new Mock<ICharacters>();
+            chars.Setup(f => f.Entries).Returns(charObjects);
+            _documentMock.Setup(f => f.Characters).Returns(chars.Object);
 
             // Act
             var actualResult = await _sut.CheckRuleAsync(_documentMock.Object);

@@ -4,16 +4,12 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Models.Implementation
 {
     public class Word : IWord
     {
-        public Word(string text, IFont font)
+        public Word(ICharacters characters)
         {
-            Guard.StringNotNullOrEmpty(() => text);
-            Guard.ObjectNotNull(() => font);
-
-            Text = text;
-            Font = font;
+            Guard.ObjectNotNull(() => characters);
+            Characters = characters;
         }
 
-        public string Text { get; }
-        public IFont Font { get; }
+        public ICharacters Characters { get; }
     }
 }

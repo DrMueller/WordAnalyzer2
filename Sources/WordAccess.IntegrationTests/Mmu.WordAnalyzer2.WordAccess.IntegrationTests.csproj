@@ -23,6 +23,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="TestingInfrastructure\WordDocuments\ShapeWithoutDescription.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestingInfrastructure\WordDocuments\ShapeWithDescription.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestingInfrastructure\WordDocuments\TableWithoutDescription.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestingInfrastructure\WordDocuments\Glossary.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

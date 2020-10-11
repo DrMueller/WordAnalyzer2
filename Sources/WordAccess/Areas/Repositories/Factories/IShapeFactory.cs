@@ -4,10 +4,8 @@ using Mmu.WordAnalyzer2.WordAccess.Areas.Models;
 
 namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Factories
 {
-    public interface IWordFactory
+    public interface IShapeFactory
     {
-        IReadOnlyCollection<IWord> CreateAll(Document document);
-
-        IReadOnlyCollection<IWord> CreateFromRange(Range range);
+        IReadOnlyCollection<IShape> CreateAll(Document document);
     }
 }

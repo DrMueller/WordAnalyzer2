@@ -2,7 +2,8 @@
 {
     public enum Position
     {
+        None = 0,
         Above,
-        Blow
+        Below
     }
 }

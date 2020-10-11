@@ -7,16 +7,28 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Models.Implementation
     {
         public WordDocument(
             IReadOnlyCollection<IExternalHyperLink> externalHyperLinks,
-            IReadOnlyCollection<IWord> words)
+            ICharacters characters,
+            IReadOnlyCollection<IWord> words,
+            IReadOnlyCollection<ITable> tables,
+            IReadOnlyCollection<IShape> shapes)
         {
             Guard.ObjectNotNull(() => externalHyperLinks);
+            Guard.ObjectNotNull(() => characters);
             Guard.ObjectNotNull(() => words);
+            Guard.ObjectNotNull(() => tables);
+            Guard.ObjectNotNull(() => shapes);
 
             ExternalHyperLinks = externalHyperLinks;
+            Characters = characters;
             Words = words;
+            Tables = tables;
+            Shapes = shapes;
         }
 
+        public ICharacters Characters { get; }
         public IReadOnlyCollection<IExternalHyperLink> ExternalHyperLinks { get; }
+        public IReadOnlyCollection<IShape> Shapes { get; }
+        public IReadOnlyCollection<ITable> Tables { get; }
         public IReadOnlyCollection<IWord> Words { get; }
     }
 }

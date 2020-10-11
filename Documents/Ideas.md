@@ -18,26 +18,11 @@ Regel-Resultat
 
 ## Regeln
 
-### Wörter im Glossar
-
-Werden die Wörter im Glossar tatsächlich verwendet?
-
-1. Glossar Tabelle identifizieren
-2. Wörter in der Glossar Tabelle identifizieren
-3. Wörter im Text Count > 1 (oder Glossar Tabelle ausschliessen)
-
 ### Externe Link LINK Verknüpfung
 
 1. Link-Tabelle identifizieren
 2. Links in der Link-Tabelle identifizieren
 3. Passen diese überein?
-
-### Interne Links prüfen
-
-Sind alle internen Links innerhalb des Word-Dokuments?
-
-1.Alle internen Links aufrufen
-2. Zeigen diese Links auf das Word-Dokument?
 
 ### Abbildungen haben Beschreibung unterhalb
 
@@ -55,15 +40,6 @@ Sind alle internen Links innerhalb des Word-Dokuments?
 2. Abbildungsverzeichnis identidizieren
 3. Stimmen die Abbildungsbeschreibungen zum Verzeichnis
 
-### Tabellen haben Beschreibung oberhalb
-
-1. Alle Tabellen identifizieren
-2. Haben die Tabellen oberhalb eine Beschreibung
-
-### Tabellen-Beschreibungen sind sortiert
-
-1. Alle Tabellen identifizieren
-2. Sind die Tabellen sortiert und starten mit "Tabelle:"
 
 ### Tabellen sind im Tabellenverzeichnis
 
@@ -94,7 +70,6 @@ Sind alle internen Links innerhalb des Word-Dokuments?
 
 Hat der ganze Text die gleiche Font?
 
-
 ### Externe Links prüfen
 
 Sind alle externen Links im Word-Dokument aufrufbar?
@@ -102,3 +77,30 @@ Sind alle externen Links im Word-Dokument aufrufbar?
 1. Link-Tabelle identifizieren
 2. Links in der Link-Tabelle identifizieren
 3. Alle Links aufrufen
+
+### Tabellen haben Beschreibung oberhalb
+
+1. Alle Tabellen identifizieren
+2. Haben die Tabellen oberhalb eine Beschreibung
+
+### Tabellen-Beschreibungen sind sortiert und starten mit Tabelle
+
+1. Alle Tabellen identifizieren
+2. Sind die Tabellen sortiert und starten mit "Tabelle:"
+
+### Wörter im Glossar
+
+Werden die Wörter im Glossar tatsächlich verwendet?
+
+1. Glossar Tabelle identifizieren
+2. Wörter in der Glossar Tabelle identifizieren
+3. Wörter im Text Count > 1 (oder Glossar Tabelle ausschliessen)
+
+# Nicht umgesetzt
+
+## Interne Links prüfen
+
+Sind alle internen Links innerhalb des Word-Dokuments?
+
+1.Alle internen Links aufrufen
+2. Zeigen diese Links auf das Word-Dokument?

@@ -3,42 +3,59 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Microsoft.Office.Interop.Word;
 using Mmu.Mlh.LanguageExtensions.Areas.Collections;
 using Mmu.WordAnalyzer2.WordAccess.Areas.Models;
 using Mmu.WordAnalyzer2.WordAccess.Areas.Models.Implementation;
 using Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Factories;
+using nat = Microsoft.Office.Interop.Word;
 
 namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Implementation
 {
     public class WordDocumentRepository : IWordDocumentRepository
     {
-        private readonly IWordFactory _wordFactory;
+        private readonly ICharactersFactory _characterFactory;
         private readonly IExternalHyperLinkFactory _externalHyperLinkFactory;
+        private readonly ITableFactory _tableFactory;
+        private readonly IShapeFactory _shapeFactory;
+        private readonly IWordFactory _wordFactory;
 
         public WordDocumentRepository(
+            ICharactersFactory characterFactory,
+            IExternalHyperLinkFactory externalHyperLinkFactory,
             IWordFactory wordFactory,
-            IExternalHyperLinkFactory externalHyperLinkFactory)
+            ITableFactory tableFactory,
+            IShapeFactory shapeFactory)
         {
-            _wordFactory = wordFactory;
+            _characterFactory = characterFactory;
             _externalHyperLinkFactory = externalHyperLinkFactory;
+            _wordFactory = wordFactory;
+            _tableFactory = tableFactory;
+            _shapeFactory = shapeFactory;
         }
 
         public Task<IWordDocument> LoadAsync(string filePath)
         {
-            Application app = null;
-            Document doc = null;
+            nat.Application app = null;
+            nat.Document doc = null;
 
             try
             {
-                app = new Application();
+                app = new nat.Application();
                 doc = app.Documents.Open(filePath);
-                var words = _wordFactory.CreateAll(doc);
+                var characters = _characterFactory.CreateAll(doc);
                 var externalLinks = _externalHyperLinkFactory.CreateAll(doc);
+                var words = _wordFactory.CreateAll(doc);
+                var tables = _tableFactory.CreateAll(doc);
+                var shapes = _shapeFactory.CreateAll(doc);
 
-                IWordDocument result = new WordDocument(externalLinks, words);
+                IWordDocument result = new WordDocument(
+                    externalLinks,
+                    characters,
+                    words,
+                    tables,
+                    shapes);
 
-                return System.Threading.Tasks.Task.FromResult(result);
+                return Task.FromResult(result);
             }
             finally
             {
