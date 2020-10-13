@@ -23,9 +23,30 @@ namespace Mmu.WordAnalyzer2.WordAccess.IntegrationTests.TestingAreas.Features
             return Task.CompletedTask;
         }
 
+        private Task And_given_the_WordDocument_contains_a_list_of_shapes_with_one_entry()
+        {
+            _wordDocumentName = "ListOfShapes";
+
+            return Task.CompletedTask;
+        }
+
+        private Task And_given_the_WordDocument_contains_a_list_of_tables_with_one_entry()
+        {
+            _wordDocumentName = "ListOfTables";
+
+            return Task.CompletedTask;
+        }
+
         private Task And_given_the_WordDocument_contains_a_Table_without_description()
         {
             _wordDocumentName = "TableWithoutDescription";
+
+            return Task.CompletedTask;
+        }
+
+        private Task And_given_the_WordDocument_contains_five_sections()
+        {
+            _wordDocumentName = "Sections";
 
             return Task.CompletedTask;
         }
@@ -88,9 +109,54 @@ namespace Mmu.WordAnalyzer2.WordAccess.IntegrationTests.TestingAreas.Features
             return Task.CompletedTask;
         }
 
-        private Task Then_the_WordDocument_contains_one_Table()
+        private Task Then_the_list_of_shapes_has_no_entries()
         {
-            Assert.Equal(1, _wordDocument.Tables.Count);
+            Assert.Empty(_wordDocument.ListOfShapes.Entries);
+
+            return Task.CompletedTask;
+        }
+
+        private Task Then_the_list_of_shapes_has_one_entry()
+        {
+            Assert.Equal(1, _wordDocument.ListOfShapes.Entries.Count);
+            var entry = _wordDocument.ListOfShapes.Entries.Single();
+
+            Assert.Equal("Abbildung 1: Test\t1", entry.Text);
+
+            return Task.CompletedTask;
+        }
+
+        private Task Then_the_list_of_tables_has_no_entries()
+        {
+            Assert.Empty(_wordDocument.ListOfTables.Entries);
+
+            return Task.CompletedTask;
+        }
+
+        private Task Then_the_list_of_tables_has_one_entry()
+        {
+            Assert.Equal(1, _wordDocument.ListOfTables.Entries.Count);
+            var entry = _wordDocument.ListOfTables.Entries.Single();
+
+            Assert.Equal("Tabelle 1: Test1234\t1", entry.Text);
+
+            return Task.CompletedTask;
+        }
+
+        private Task Then_the_Shape_has_a_description()
+        {
+            var shape = _wordDocument.Shapes.Single();
+            Assert.Equal("Abbildung 1: Test", shape.Description.PlainDescription);
+            Assert.Equal(Position.Below, shape.Description.Position);
+
+            return Task.CompletedTask;
+        }
+
+        private Task Then_the_Shape_has_no_description()
+        {
+            var shape = _wordDocument.Shapes.Single();
+            Assert.Equal(string.Empty, shape.Description.PlainDescription);
+            Assert.Equal(Position.None, shape.Description.Position);
 
             return Task.CompletedTask;
         }
@@ -108,6 +174,28 @@ namespace Mmu.WordAnalyzer2.WordAccess.IntegrationTests.TestingAreas.Features
         {
             Assert.NotNull(_wordDocument.Characters);
             Assert.Equal(23, _wordDocument.Characters.Entries.Count);
+
+            return Task.CompletedTask;
+        }
+
+        private Task Then_the_WordDocument_contains_a_list_of_shapes()
+        {
+            Assert.NotNull(_wordDocument.ListOfShapes);
+
+            return Task.CompletedTask;
+        }
+
+        private Task Then_the_WordDocument_contains_a_list_of_tables()
+        {
+            Assert.NotNull(_wordDocument.ListOfTables);
+
+            return Task.CompletedTask;
+        }
+
+        private Task Then_the_WordDocument_contains_five_sections()
+        {
+            Assert.NotNull(_wordDocument.Sections);
+            Assert.Equal(5, _wordDocument.Sections.Entries.Count);
 
             return Task.CompletedTask;
         }
@@ -139,21 +227,9 @@ namespace Mmu.WordAnalyzer2.WordAccess.IntegrationTests.TestingAreas.Features
             return Task.CompletedTask;
         }
 
-
-        private Task Then_the_Shape_has_a_description()
+        private Task Then_the_WordDocument_contains_one_Table()
         {
-            var shape = _wordDocument.Shapes.Single();
-            Assert.Equal("Abbildung 1: Test", shape.Description.PlainDescription);
-            Assert.Equal(Position.Below, shape.Description.Position);
-
-            return Task.CompletedTask;
-        }
-
-        private Task Then_the_Shape_has_no_description()
-        {
-            var shape = _wordDocument.Shapes.Single();
-            Assert.Equal(string.Empty, shape.Description.PlainDescription);
-            Assert.Equal(Position.None, shape.Description.Position);
+            Assert.Equal(1, _wordDocument.Tables.Count);
 
             return Task.CompletedTask;
         }

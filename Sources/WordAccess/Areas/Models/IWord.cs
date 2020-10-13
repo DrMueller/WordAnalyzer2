@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Mmu.WordAnalyzer2.WordAccess.Areas.Models
+﻿namespace Mmu.WordAnalyzer2.WordAccess.Areas.Models
 {
     public interface IWord
     {

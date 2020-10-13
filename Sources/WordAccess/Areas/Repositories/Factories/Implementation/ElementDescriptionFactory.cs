@@ -28,7 +28,7 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Factories.Implementati
                 position = Position.Below;
                 description = _wordFactory.CreateFromRange(sentenceNext);
             }
-            else if(sentenceBefore.Text.Contains(anchorElement))
+            else if (sentenceBefore.Text.Contains(anchorElement))
             {
                 position = Position.Above;
                 description = _wordFactory.CreateFromRange(sentenceBefore);

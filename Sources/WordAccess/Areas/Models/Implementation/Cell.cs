@@ -14,6 +14,7 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Models.Implementation
 
             ColumnIndex = columnIndex;
             RowIndex = rowIndex;
+            Words = words;
         }
 
         public int ColumnIndex { get; }

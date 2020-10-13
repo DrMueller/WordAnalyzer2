@@ -15,8 +15,10 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Implementation
     {
         private readonly ICharactersFactory _characterFactory;
         private readonly IExternalHyperLinkFactory _externalHyperLinkFactory;
-        private readonly ITableFactory _tableFactory;
+        private readonly IListFactory _listFactory;
+        private readonly ISectionsFactory _sectionsFactory;
         private readonly IShapeFactory _shapeFactory;
+        private readonly ITableFactory _tableFactory;
         private readonly IWordFactory _wordFactory;
 
         public WordDocumentRepository(
@@ -24,12 +26,16 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Implementation
             IExternalHyperLinkFactory externalHyperLinkFactory,
             IWordFactory wordFactory,
             ITableFactory tableFactory,
-            IShapeFactory shapeFactory)
+            IShapeFactory shapeFactory,
+            IListFactory listFactory,
+            ISectionsFactory sectionsFactory)
         {
             _characterFactory = characterFactory;
             _externalHyperLinkFactory = externalHyperLinkFactory;
             _wordFactory = wordFactory;
             _tableFactory = tableFactory;
+            _listFactory = listFactory;
+            _sectionsFactory = sectionsFactory;
             _shapeFactory = shapeFactory;
         }
 
@@ -47,13 +53,19 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Implementation
                 var words = _wordFactory.CreateAll(doc);
                 var tables = _tableFactory.CreateAll(doc);
                 var shapes = _shapeFactory.CreateAll(doc);
+                var listOfShapes = _listFactory.CreateListOfShapes(doc);
+                var listOfTables = _listFactory.CreateListOfTables(doc);
+                var sections = _sectionsFactory.Create(doc);
 
                 IWordDocument result = new WordDocument(
                     externalLinks,
                     characters,
                     words,
                     tables,
-                    shapes);
+                    shapes,
+                    listOfShapes,
+                    listOfTables,
+                    sections);
 
                 return Task.FromResult(result);
             }

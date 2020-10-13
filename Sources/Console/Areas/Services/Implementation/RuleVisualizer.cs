@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Mmu.Mlh.ConsoleExtensions.Areas.ConsoleOutput.Services;
 using Mmu.Mlh.LanguageExtensions.Areas.Collections;
-using Mmu.WordAnalyzer2.Domain.Areas.Services;
+using Mmu.WordAnalyzer2.Domain.Areas.RuleChecking.Services;
 
 namespace Mmu.WordAnalyzer2.Console.Areas.Services.Implementation
 {

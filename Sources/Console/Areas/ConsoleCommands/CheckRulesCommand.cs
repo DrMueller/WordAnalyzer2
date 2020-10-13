@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Mmu.Mlh.ConsoleExtensions.Areas.Commands.Models;
 using Mmu.WordAnalyzer2.Console.Areas.Services;
@@ -15,13 +13,13 @@ namespace Mmu.WordAnalyzer2.Console.Areas.ConsoleCommands
         {
             _ruleVisualizer = ruleVisualizer;
         }
- 
+
+        public string Description { get; } = "Run rules";
+        public ConsoleKey Key { get; } = ConsoleKey.F1;
+
         public async Task ExecuteAsync()
         {
             await _ruleVisualizer.CheckRulesAsync();
         }
-
-        public string Description { get; } = "Run rules";
-        public ConsoleKey Key { get; } = ConsoleKey.F1;
     }
 }

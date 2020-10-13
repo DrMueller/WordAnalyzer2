@@ -8,10 +8,9 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Factories.Implementati
 {
     public class TableFactory : ITableFactory
     {
-        private readonly IWordFactory _wordFactory;
-        private readonly IElementDescriptionFactory _descFactory;
-
         private const string TableDescriptionPrefix = "Tabelle";
+        private readonly IElementDescriptionFactory _descFactory;
+        private readonly IWordFactory _wordFactory;
 
         public TableFactory(
             IWordFactory wordFactory,
@@ -29,7 +28,6 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Factories.Implementati
                 .Select(CreateTable)
                 .ToList();
         }
-
 
         private ICell CreateCell(nat.Cell cell)
         {

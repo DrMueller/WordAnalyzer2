@@ -1,5 +1,5 @@
 ﻿using Lamar;
-using Mmu.WordAnalyzer2.Domain.Areas.Rules;
+using Mmu.WordAnalyzer2.Domain.Areas.RuleChecking.Rules;
 
 namespace Mmu.WordAnalyzer2.Domain.Infrastructure.DependencyInjection
 {

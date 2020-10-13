@@ -9,18 +9,17 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Factories.Implementati
 {
     public class WordFactory : IWordFactory
     {
+        private static readonly IReadOnlyCollection<string> _nonWords = new List<string>
+        {
+            Environment.NewLine,
+            "\r"
+        };
         private readonly ICharactersFactory _charFactory;
 
         public WordFactory(ICharactersFactory charFactory)
         {
             _charFactory = charFactory;
         }
-
-        private static readonly IReadOnlyCollection<string> _nonWords = new List<string>
-        {
-            Environment.NewLine,
-            "\r"
-        };
 
         public IReadOnlyCollection<IWord> CreateAll(Document document)
         {
@@ -31,28 +30,27 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Factories.Implementati
                 .ToList();
 
             var words = CreateFromRanges(wordRanges);
-            
+
             return words;
         }
 
         public IReadOnlyCollection<IWord> CreateFromRange(Range range)
         {
             return CreateFromRanges(
-                range.
-                Words.
-                Cast<Range>()
-                .Where(r => !_nonWords.Contains(r.Text))
-                .ToList());
+                range.Words.Cast<Range>()
+                    .Where(r => !_nonWords.Contains(r.Text))
+                    .ToList());
         }
 
         private IReadOnlyCollection<Word> CreateFromRanges(IReadOnlyCollection<Range> ranges)
         {
-            return ranges.Select(wr =>
-            {
-                var chars = _charFactory.CreateFromRange(wr);
-                return new Word(chars);
-            }).ToList();
-        }
+            return ranges.Select(
+                wr =>
+                {
+                    var chars = _charFactory.CreateFromRange(wr);
 
+                    return new Word(chars);
+                }).ToList();
+        }
     }
 }

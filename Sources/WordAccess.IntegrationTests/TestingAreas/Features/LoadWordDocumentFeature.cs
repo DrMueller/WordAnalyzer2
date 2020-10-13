@@ -42,14 +42,27 @@ I want to load the WordDocument")]
         }
 
         [Scenario]
-        public async Task Table_Glossary()
+        public async Task List_of_shapes()
         {
             await Runner.RunScenarioAsync(
                 Given_Loading_WordDocument,
-                And_given_the_WordDocument_contains_a_Glossary_Table,
+                And_given_the_WordDocument_contains_a_list_of_shapes_with_one_entry,
                 When_the_WordDocument_is_loaded,
-                Then_the_WordDocument_contains_one_Table,
-                Then_the_glossary_Table_contains_the_description_Glossar);
+                Then_the_WordDocument_contains_a_list_of_shapes,
+                Then_the_list_of_shapes_has_one_entry,
+                Then_the_list_of_tables_has_no_entries);
+        }
+
+        [Scenario]
+        public async Task List_of_tables()
+        {
+            await Runner.RunScenarioAsync(
+                Given_Loading_WordDocument,
+                And_given_the_WordDocument_contains_a_list_of_tables_with_one_entry,
+                When_the_WordDocument_is_loaded,
+                Then_the_WordDocument_contains_a_list_of_tables,
+                Then_the_list_of_tables_has_one_entry,
+                Then_the_list_of_shapes_has_no_entries);
         }
 
         [Scenario]
@@ -72,6 +85,27 @@ I want to load the WordDocument")]
                 When_the_WordDocument_is_loaded,
                 Then_the_WordDocument_contains_one_Shape,
                 Then_the_Shape_has_no_description);
+        }
+
+        [Scenario]
+        public async Task Sections_pages()
+        {
+            await Runner.RunScenarioAsync(
+                Given_Loading_WordDocument,
+                And_given_the_WordDocument_contains_five_sections,
+                When_the_WordDocument_is_loaded,
+                Then_the_WordDocument_contains_five_sections);
+        }
+
+        [Scenario]
+        public async Task Table_Glossary()
+        {
+            await Runner.RunScenarioAsync(
+                Given_Loading_WordDocument,
+                And_given_the_WordDocument_contains_a_Glossary_Table,
+                When_the_WordDocument_is_loaded,
+                Then_the_WordDocument_contains_one_Table,
+                Then_the_glossary_Table_contains_the_description_Glossar);
         }
 
         [Scenario]
