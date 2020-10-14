@@ -130,6 +130,8 @@
     <Compile Include="Areas\Repositories\IWordDocumentRepository.cs" />
     <Compile Include="Areas\Repositories\Factories\Implementation\WordFactory.cs" />
     <Compile Include="Areas\Repositories\Factories\IWordFactory.cs" />
+    <Compile Include="Areas\Services\Implementation\WordKiller.cs" />
+    <Compile Include="Areas\Services\IWordKiller.cs" />
     <Compile Include="Infrastructure\DependencyInjection\WordAccessServiceRegistryCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

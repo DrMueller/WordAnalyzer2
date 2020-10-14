@@ -7,7 +7,6 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Models.Implementation
     {
         public WordDocument(
             IReadOnlyCollection<IExternalHyperLink> externalHyperLinks,
-            ICharacters characters,
             IReadOnlyCollection<IWord> words,
             IReadOnlyCollection<ITable> tables,
             IReadOnlyCollection<IShape> shapes,
@@ -16,7 +15,6 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Models.Implementation
             ISections sections)
         {
             Guard.ObjectNotNull(() => externalHyperLinks);
-            Guard.ObjectNotNull(() => characters);
             Guard.ObjectNotNull(() => words);
             Guard.ObjectNotNull(() => tables);
             Guard.ObjectNotNull(() => shapes);
@@ -24,7 +22,6 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Models.Implementation
             Guard.ObjectNotNull(() => listOfTables);
 
             ExternalHyperLinks = externalHyperLinks;
-            Characters = characters;
             Words = words;
             Tables = tables;
             Shapes = shapes;
@@ -33,7 +30,6 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Models.Implementation
             Sections = sections;
         }
 
-        public ICharacters Characters { get; }
         public IReadOnlyCollection<IExternalHyperLink> ExternalHyperLinks { get; }
         public IListOfShapes ListOfShapes { get; }
         public IListOfTables ListOfTables { get; }

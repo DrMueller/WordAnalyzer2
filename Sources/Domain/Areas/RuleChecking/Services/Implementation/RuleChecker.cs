@@ -22,7 +22,7 @@ namespace Mmu.WordAnalyzer2.Domain.Areas.RuleChecking.Services.Implementation
 
         public async Task<IReadOnlyCollection<RuleCheckResult>> CheckAllRulesAsync()
         {
-            var wordDocument = await _wordRepo.LoadAsync(@"C:\MyGit\Personal\WordAnalyzer2\TestDoc.docx");
+            var wordDocument = await _wordRepo.LoadAsync(@"C:\Users\mlm\Dropbox\BFH\MAS\Dokumente\MAS - Kopie.docx");
 
             var ruleTasks = _rules.Select(f => f.CheckRuleAsync(wordDocument));
 

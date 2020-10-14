@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mmu.WordAnalyzer2.WordAccess.Areas.Models;
 using Mmu.WordAnalyzer2.WordAccess.Areas.Models.Implementation;
 using nat = Microsoft.Office.Interop.Word;
@@ -20,13 +21,13 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Factories.Implementati
             _descFactory = descFactory;
         }
 
-        public IReadOnlyCollection<ITable> CreateAll(nat.Document document)
+        public async Task<IReadOnlyCollection<ITable>> CreateAllAsync(nat.Document document)
         {
-            return document
+            return await Task.Run(() => document
                 .Tables
                 .Cast<nat.Table>()
                 .Select(CreateTable)
-                .ToList();
+                .ToList());
         }
 
         private ICell CreateCell(nat.Cell cell)

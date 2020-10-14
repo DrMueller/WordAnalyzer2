@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mmu.WordAnalyzer2.WordAccess.Areas.Models;
 using Mmu.WordAnalyzer2.WordAccess.Areas.Models.Implementation;
 using nat = Microsoft.Office.Interop.Word;
@@ -17,18 +18,21 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Factories.Implementati
             _descFactory = descFactory;
         }
 
-        public IReadOnlyCollection<IShape> CreateAll(nat.Document document)
+        public async Task<IReadOnlyCollection<IShape>> CreateAllAsync(nat.Document document)
         {
-            var inlineShapes = document
-                .InlineShapes
-                .Cast<nat.InlineShape>()
-                .ToList();
+            return await Task.Run(
+                () =>
+                {
+                    var inlineShapes = document
+                        .InlineShapes
+                        .Cast<nat.InlineShape>()
+                        .ToList();
 
-            var shapeDescriptions = inlineShapes.Select(f => _descFactory.CreateFromRange(f.Range, PictureDescriptionPrefix));
+                    var shapeDescriptions = inlineShapes.Select(f => _descFactory.CreateFromRange(f.Range, PictureDescriptionPrefix));
+                    var shapes = shapeDescriptions.Select(sd => new Shape(sd)).ToList();
 
-            var shapes = shapeDescriptions.Select(sd => new Shape(sd)).ToList();
-
-            return shapes;
+                    return shapes;
+                });
         }
     }
 }

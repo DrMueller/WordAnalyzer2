@@ -4,7 +4,6 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Models
 {
     public interface IWordDocument
     {
-        ICharacters Characters { get; }
         IReadOnlyCollection<IExternalHyperLink> ExternalHyperLinks { get; }
         ISections Sections { get; }
         IListOfShapes ListOfShapes { get; }

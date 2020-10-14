@@ -1,12 +1,13 @@
-﻿using Microsoft.Office.Interop.Word;
+﻿using System.Threading.Tasks;
+using Microsoft.Office.Interop.Word;
 using Mmu.WordAnalyzer2.WordAccess.Areas.Models;
 
 namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Factories
 {
     public interface IListFactory
     {
-        IListOfShapes CreateListOfShapes(Document document);
+        Task<IListOfShapes> CreateListOfShapesAsync(Document document);
 
-        IListOfTables CreateListOfTables(Document document);
+        Task<IListOfTables> CreateListOfTablesAsync(Document document);
     }
 }

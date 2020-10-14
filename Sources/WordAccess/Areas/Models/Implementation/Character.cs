@@ -6,7 +6,12 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Models.Implementation
     {
         public Character(string text, IFont font)
         {
-            Guard.StringNotNullOrEmpty(() => text);
+            if (string.IsNullOrEmpty(text))
+            {
+                text = "(no text)";
+            }
+
+            //Guard.StringNotNullOrEmpty(() => text);
             Guard.ObjectNotNull(() => font);
 
             Text = text;

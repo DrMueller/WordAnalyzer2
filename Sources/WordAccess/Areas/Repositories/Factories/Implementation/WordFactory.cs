@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Office.Interop.Word;
 using Mmu.WordAnalyzer2.WordAccess.Areas.Models;
 using Mmu.WordAnalyzer2.WordAccess.Areas.Models.Implementation;
@@ -21,17 +22,19 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Factories.Implementati
             _charFactory = charFactory;
         }
 
-        public IReadOnlyCollection<IWord> CreateAll(Document document)
+        public async Task<IReadOnlyCollection<IWord>> CreateAllAsync(Document document)
         {
-            var wordRanges = document
-                .Words
-                .Cast<Range>()
-                .Where(range => !_nonWords.Contains(range.Text))
-                .ToList();
+            return await System.Threading.Tasks.Task.Run(() =>
+            {
+                var wordRanges = document
+                    .Words
+                    .Cast<Range>()
+                    .Where(range => !_nonWords.Contains(range.Text))
+                    .ToList();
 
-            var words = CreateFromRanges(wordRanges);
-
-            return words;
+                var words = CreateFromRanges(wordRanges);
+                return words;
+            });
         }
 
         public IReadOnlyCollection<IWord> CreateFromRange(Range range)

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Mmu.WordAnalyzer2.WordAccess.Areas.Models;
 using Mmu.WordAnalyzer2.WordAccess.Areas.Models.Implementation;
 using nat = Microsoft.Office.Interop.Word;
@@ -14,18 +15,24 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Factories.Implementati
             _charFactory = charFactory;
         }
 
-        public IListOfShapes CreateListOfShapes(nat.Document document)
+        public async Task<IListOfShapes> CreateListOfShapesAsync(nat.Document document)
         {
-            var entries = CreateEntries(document, "Abbildung");
+            return await Task.Run(() =>
+            {
+                var entries = CreateEntries(document, "Abbildung");
 
-            return new ListOfShapes(entries);
+                return new ListOfShapes(entries);
+            });
         }
 
-        public IListOfTables CreateListOfTables(nat.Document document)
+        public async Task<IListOfTables> CreateListOfTablesAsync(nat.Document document)
         {
-            var entries = CreateEntries(document, "Tabelle");
+            return await Task.Run(() =>
+            {
+                var entries = CreateEntries(document, "Tabelle");
 
-            return new ListOfTables(entries);
+                return new ListOfTables(entries);
+            });
         }
 
         private IReadOnlyCollection<ICharacters> CreateEntries(nat.Document document, string entryPrefix)

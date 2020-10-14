@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using Mmu.WordAnalyzer2.WordAccess.Areas.Models;
 using Mmu.WordAnalyzer2.WordAccess.Areas.Models.Implementation;
 using nat = Microsoft.Office.Interop.Word;
@@ -15,20 +17,23 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Factories.Implementati
             "\r"
         };
 
-        public ICharacters CreateAll(nat.Document document)
+        public async Task<ICharacters> CreateAllAsync(nat.Document document)
         {
-            var ranges = document
-                .Characters
-                .Cast<nat.Range>()
-                .Where(f => !_nonCharacters.Contains(f.Text))
-                .ToList();
+            return await Task.Run(() =>
+            {
+                var ranges = document
+                    .Characters
+                    .Cast<nat.Range>()
+                    .Where(f => !_nonCharacters.Contains(f.Text))
+                    .ToList();
 
-            var charEntries = ranges
-                .Select(CreateCharList)
-                .SelectMany(f => f)
-                .ToList();
+                var charEntries = ranges
+                    .Select(CreateCharList)
+                    .SelectMany(f => f)
+                    .ToList();
 
-            return new Characters(charEntries);
+                return new Characters(charEntries);
+            });
         }
 
         public ICharacters CreateFromRange(nat.Range range)
@@ -50,7 +55,7 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Factories.Implementati
 
         private static ICharacter MapSingleCharacter(nat.Range range)
         {
-            var font = new Font(range.Font.Name);
+             var font = new Font(range.Font.Name);
 
             return new Character(range.Text, font);
         }

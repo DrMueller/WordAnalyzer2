@@ -48,7 +48,9 @@ namespace Mmu.WordAnalyzer2.Domain.UnitTests.TestingAreas.Areas.RuleChecking.Rul
             var charObjects = charMocks.Select(f => f.Object).ToList();
             var chars = new Mock<ICharacters>();
             chars.Setup(f => f.Entries).Returns(charObjects);
-            _documentMock.Setup(f => f.Characters).Returns(chars.Object);
+            var word = new Mock<IWord>();
+            word.Setup(f => f.Characters).Returns(chars.Object);
+            _documentMock.Setup(f => f.Words).Returns(new List<IWord> { word.Object });
 
             // Act
             var actualResult = await _sut.CheckRuleAsync(_documentMock.Object);
@@ -80,7 +82,9 @@ namespace Mmu.WordAnalyzer2.Domain.UnitTests.TestingAreas.Areas.RuleChecking.Rul
             var charObjects = charMocks.Select(f => f.Object).ToList();
             var chars = new Mock<ICharacters>();
             chars.Setup(f => f.Entries).Returns(charObjects);
-            _documentMock.Setup(f => f.Characters).Returns(chars.Object);
+            var word = new Mock<IWord>();
+            word.Setup(f => f.Characters).Returns(chars.Object);
+            _documentMock.Setup(f => f.Words).Returns(new List<IWord> { word.Object });
 
             // Act
             var actualResult = await _sut.CheckRuleAsync(_documentMock.Object);

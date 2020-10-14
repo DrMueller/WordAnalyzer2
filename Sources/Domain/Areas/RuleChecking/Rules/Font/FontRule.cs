@@ -12,8 +12,8 @@ namespace Mmu.WordAnalyzer2.Domain.Areas.RuleChecking.Rules.Font
         public Task<RuleCheckResult> CheckRuleAsync(IWordDocument document)
         {
             var differentFontsCount = document
-                .Characters
-                .Entries
+                .Words
+                .SelectMany(f => f.Characters.Entries)
                 .Select(f => f.Font)
                 .Select(f => f.Name)
                 .Distinct()

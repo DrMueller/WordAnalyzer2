@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mmu.WordAnalyzer2.WordAccess.Areas.Models;
 using Mmu.WordAnalyzer2.WordAccess.Areas.Models.Implementation;
 using nat = Microsoft.Office.Interop.Word;
@@ -8,36 +9,39 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Factories.Implementati
 {
     public class SectionsFactory : ISectionsFactory
     {
-        public ISections Create(nat.Document document)
+        public async Task<ISections> CreateAsync(nat.Document document)
         {
-            var sections = document.Sections.Cast<nat.Section>().ToList();
-
-            var newSections = new List<ISection>();
-
-            foreach (var sec in sections)
+            return await Task.Run(() =>
             {
-                var pageNumberDefs = new List<IPageNumberDefinition>();
-                var footers = sec.Footers.Cast<nat.HeaderFooter>().ToList();
+                var sections = document.Sections.Cast<nat.Section>().ToList();
 
-                foreach (var footer in footers)
+                var newSections = new List<ISection>();
+
+                foreach (var sec in sections)
                 {
-                    var np = new PageNumberDefinition(
-                        footer.PageNumbers.RestartNumberingAtSection,
-                        footer.PageNumbers.ShowFirstPageNumber,
-                        footer.PageNumbers.StartingNumber);
+                    var pageNumberDefs = new List<IPageNumberDefinition>();
+                    var footers = sec.Footers.Cast<nat.HeaderFooter>().ToList();
 
-                    // It seems like we receive a `HeaderFooter` object per actual page, so we just add the different ones
-                    // Might always be exactly one, but we can't besure add the moment
-                    if (!pageNumberDefs.Contains(np))
+                    foreach (var footer in footers)
                     {
-                        pageNumberDefs.Add(np);
+                        var np = new PageNumberDefinition(
+                            footer.PageNumbers.RestartNumberingAtSection,
+                            footer.PageNumbers.ShowFirstPageNumber,
+                            footer.PageNumbers.StartingNumber);
+
+                        // It seems like we receive a `HeaderFooter` object per actual page, so we just add the different ones
+                        // Might always be exactly one, but we can't besure add the moment
+                        if (!pageNumberDefs.Contains(np))
+                        {
+                            pageNumberDefs.Add(np);
+                        }
                     }
+
+                    newSections.Add(new Section(pageNumberDefs));
                 }
 
-                newSections.Add(new Section(pageNumberDefs));
-            }
-
-            return new Sections(newSections);
+                return new Sections(newSections);
+            });
         }
     }
 }

@@ -172,8 +172,8 @@ namespace Mmu.WordAnalyzer2.WordAccess.IntegrationTests.TestingAreas.Features
 
         private Task Then_the_WordDocument_contains_23_Characters()
         {
-            Assert.NotNull(_wordDocument.Characters);
-            Assert.Equal(23, _wordDocument.Characters.Entries.Count);
+            Assert.NotNull(_wordDocument.Words);
+            Assert.Equal(23, _wordDocument.Words.SelectMany(f => f.Characters.Entries).Count());
 
             return Task.CompletedTask;
         }
@@ -213,8 +213,8 @@ namespace Mmu.WordAnalyzer2.WordAccess.IntegrationTests.TestingAreas.Features
 
         private Task Then_the_WordDocument_contains_no_Characters()
         {
-            Assert.NotNull(_wordDocument.Characters);
-            Assert.Empty(_wordDocument.Characters.Entries);
+            Assert.NotNull(_wordDocument.Words);
+            Assert.Empty(_wordDocument.Words.SelectMany(f => f.Characters.Entries));
 
             return Task.CompletedTask;
         }
@@ -236,7 +236,7 @@ namespace Mmu.WordAnalyzer2.WordAccess.IntegrationTests.TestingAreas.Features
 
         private Task Then_the_WordDocument_contains_the_Fonts_Calibri_and_Consolas()
         {
-            var distinctFonts = _wordDocument.Characters.Entries.Select(f => f.Font.Name).Distinct().ToList();
+            var distinctFonts = _wordDocument.Words.SelectMany(f => f.Characters.Entries).Select(f => f.Font.Name).Distinct().ToList();
 
             Assert.Equal(2, distinctFonts.Count);
             Assert.Contains(distinctFonts, f => f == "Consolas");
