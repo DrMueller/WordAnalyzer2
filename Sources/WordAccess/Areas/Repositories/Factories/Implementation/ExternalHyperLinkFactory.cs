@@ -20,6 +20,7 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Factories.Implementati
                         .Cast<Hyperlink>()
                         .Where(hyperLink => !string.IsNullOrEmpty(hyperLink.Address))
                         .Select(hyperLink => hyperLink.Address)
+                        .Where(str => !str.StartsWith("mailto"))
                         .Select(str => new Uri(str))
                         .Select(uri => new ExternalHyperLink(uri))
                         .ToList();

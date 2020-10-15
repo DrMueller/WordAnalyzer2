@@ -22,7 +22,20 @@ namespace Mmu.WordAnalyzer2.Domain.Areas.RuleChecking.Rules.TableMatching
         public Task<RuleCheckResult> CheckRuleAsync(IWordDocument document)
         {
             var words = _wordMatcher.MatchWords(document, WordPrefix);
-            var table = document.Tables.Single(f => f.Description.PlainDescription.EndsWith(TableDescriptionSuffix));
+            var tables = document.Tables.Where(f => f.Description.PlainDescription.EndsWith(TableDescriptionSuffix))
+                .ToList();
+
+            if (!tables.Any())
+            {
+                return Task.FromResult(RuleCheckResult.CreateFailure(RuleName, $"Table {WordPrefix} not found"));
+            }
+
+            if (tables.Count > 1)
+            {
+                return Task.FromResult(RuleCheckResult.CreateFailure(RuleName, $"More than one Table {WordPrefix} found"));
+            }
+
+            var table = tables.Single();
 
             var tableEntries = table
                 .Cells

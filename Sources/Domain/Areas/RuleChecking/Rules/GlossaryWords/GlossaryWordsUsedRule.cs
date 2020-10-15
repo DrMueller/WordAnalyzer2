@@ -12,19 +12,33 @@ namespace Mmu.WordAnalyzer2.Domain.Areas.RuleChecking.Rules.GlossaryWords
 
         public Task<RuleCheckResult> CheckRuleAsync(IWordDocument document)
         {
-            var glossaryTable = document.Tables.Single(f => f.Description.PlainDescription.EndsWith("Glossar"));
+            var glossaryTables = document
+                .Tables
+                .Where(f => f.Description.PlainDescription.EndsWith("Glossar"))
+                .ToList();
+
+            if (!glossaryTables.Any())
+            {
+                return Task.FromResult(RuleCheckResult.CreateFailure(RuleName, "GlossaryTable not found"));
+            }
+
+            if (glossaryTables.Count > 1)
+            {
+                return Task.FromResult(RuleCheckResult.CreateFailure(RuleName, "More than one GlossaryTable found"));
+            }
 
             var missingWords = new List<string>();
+            var glossaryTable = glossaryTables.Single();
 
             var glossaryCells = glossaryTable.Cells.Where(f => f.RowIndex > 1 && f.ColumnIndex == 1);
 
             foreach (var cell in glossaryCells)
             {
-                var cellWord = cell.Words.Single();
+                var cellWord = string.Join(string.Empty, cell.Words.Select(f => f.Characters.Text));
 
-                if (document.Words.Count(f => f.Characters.Text == cellWord.Characters.Text) == 1)
+                if (document.Words.Count(f => f.Characters.Text == cellWord) == 1)
                 {
-                    missingWords.Add(cellWord.Characters.Text);
+                    missingWords.Add(cellWord);
                 }
             }
 

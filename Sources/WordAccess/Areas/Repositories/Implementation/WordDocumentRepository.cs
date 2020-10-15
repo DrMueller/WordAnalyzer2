@@ -22,7 +22,6 @@ namespace Mmu.WordAnalyzer2.WordAccess.Areas.Repositories.Implementation
 
         public WordDocumentRepository(
             IWordKiller wordKiller,
-            ICharactersFactory characterFactory,
             IExternalHyperLinkFactory externalHyperLinkFactory,
             IWordFactory wordFactory,
             ITableFactory tableFactory,

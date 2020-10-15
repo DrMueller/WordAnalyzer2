@@ -40,9 +40,9 @@ namespace Mmu.WordAnalyzer2.Domain.UnitTests.TestingAreas.Areas.RuleChecking.Rul
             charMocks.First().Setup(f => f.Font).Returns(arialFontMock.Object);
 
             charMocks.Skip(1).ForEach(
-                word =>
+                w =>
                 {
-                    word.Setup(f => f.Font).Returns(consolasFontMock.Object);
+                    w.Setup(f => f.Font).Returns(consolasFontMock.Object);
                 });
 
             var charObjects = charMocks.Select(f => f.Object).ToList();
@@ -74,9 +74,9 @@ namespace Mmu.WordAnalyzer2.Domain.UnitTests.TestingAreas.Areas.RuleChecking.Rul
             fontMock.Setup(f => f.Name).Returns("Consolas");
 
             charMocks.ForEach(
-                word =>
+                w =>
                 {
-                    word.Setup(f => f.Font).Returns(fontMock.Object);
+                    w.Setup(f => f.Font).Returns(fontMock.Object);
                 });
 
             var charObjects = charMocks.Select(f => f.Object).ToList();
